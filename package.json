@@ -1,0 +1,41 @@
+{
+  "name": "takemybook-backend",
+  "version": "1.0.0",
+  "description": "TakeMyBook project backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start": "node index.js",
+    "nodemon": "nodemon --watch ./index.js --watch ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PunxNotDead/takemybook-backend.git"
+  },
+  "keywords": [
+    "Take",
+    "Book",
+    "Give"
+  ],
+  "author": "Stone Panda Studio",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/PunxNotDead/takemybook-backend/issues"
+  },
+  "homepage": "https://github.com/PunxNotDead/takemybook-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.3",
+    "express-domain-middleware": "^0.1.0",
+    "express-session": "^1.15.4",
+    "method-override": "^2.3.9",
+    "passport": "^0.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-config-google": "^0.9.1",
+    "husky": "^0.14.3",
+    "nodemon": "^1.11.0"
+  }
+}
