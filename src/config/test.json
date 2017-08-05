@@ -1,0 +1,16 @@
+{
+	"port": 3002,
+	"mongodb": {
+		"host": "mongodb://127.0.0.1/takemybook_test"
+	},
+	"log": {
+		"name": "test",
+		"streams": [
+			{
+				"level": "debug",
+				"path": "logs/development.log"
+			}
+		]
+	},
+	"clusterMode": false
+}

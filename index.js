@@ -1,15 +1,17 @@
 ﻿'use strict';
 
-var express = require('express');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var expressDomainMiddleware = require('express-domain-middleware');
-var cookieParser = require('cookie-parser');
-var passport = require('passport');
-var session = require('express-session');
-var apiRouter = require('./src/api_router');
+const express = require('express');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+const expressDomainMiddleware = require('express-domain-middleware');
+const cookieParser = require('cookie-parser');
+const passport = require('passport');
+const session = require('express-session');
 
-var app = express();
+const apiRouter = require('./src/api_router');
+const config = require('./src/config');
+
+const app = express();
 
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -39,9 +41,9 @@ app.use((err, req, res, next) => {
 	});
 });
 
-var server = app.listen(3000, function() {
-	var host = server.address().address;
-	var port = server.address().port;
+const server = app.listen(config.get('port'), function() {
+	const host = server.address().address;
+	const port = server.address().port;
 
 	console.log('TakeMyBook listening at http://%s:%s', host, port);
 });

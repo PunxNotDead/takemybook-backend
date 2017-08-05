@@ -1,11 +1,11 @@
 'use strict';
 
-// const User = require('../services/mongoose').model('User');
-// const passport = require('../services/passport');
-// const _ = require('underscore');
+const User = require('../services/mongoose').model('User');
 
-function list(req, res) {
-	res.json({a: 1});
+function googleCallback(req, res) {
+	const redirect = req.session.oauth2return || '/';
+	delete req.session.oauth2returnА;
+	res.redirect(redirect);
 }
 
-exports.list = list;
+exports.googleCallback = googleCallback;

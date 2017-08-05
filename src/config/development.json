@@ -1,0 +1,15 @@
+{
+	"mongodb": {
+		"host": "mongodb://127.0.0.1/takemybook"
+	},
+
+	"log": {
+		"name": "development",
+		"streams": [
+			{
+				"level": "debug",
+				"path": "logs/development.log"
+			}
+		]
+	}
+}

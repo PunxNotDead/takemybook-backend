@@ -1,0 +1,13 @@
+{
+	"port": 3000,
+	"googleClientApiId": "663608028282-qngrticdc4d8k24sbejp96l49bgde2uf.apps.googleusercontent.com",
+	"googleClientApiSecret": "1uClQlEVzifEv3ESA-Ww1_U1",
+	"clusterMode": true,
+
+	"mongodb": {
+		"mongooseOptions": {
+			"useMongoClient": true
+		}
+	}
+}
+
