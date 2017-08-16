@@ -2,6 +2,8 @@
 	"port": 3000,
 	"googleClientApiId": "663608028282-qngrticdc4d8k24sbejp96l49bgde2uf.apps.googleusercontent.com",
 	"googleClientApiSecret": "1uClQlEVzifEv3ESA-Ww1_U1",
+	"facebookClientAppId": "171900250021116",
+	"facebookClientApiSecret": "7c86b5d7eaff38a11d83f2a0c80804cf",
 	"clusterMode": true,
 
 	"mongodb": {

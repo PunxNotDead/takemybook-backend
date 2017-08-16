@@ -3,6 +3,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const _ = require('lodash');
 
 const User = require('../services/mongoose').model('User');
@@ -18,7 +19,23 @@ gender: 'male',
 provider: 'google'
 */
 
-function extractProfile(profile) {
+function extractGoogleProfile(profile) {
+	let email = null;
+
+	if (profile.emails) {
+		let filteredEmail = _.find(profile.emails, email => email.type === 'account');
+		email = filteredEmail ? filteredEmail.value : null;
+	}
+
+	return {
+		id: profile.id,
+		name: profile.displayName,
+		email: email
+	};
+}
+
+function extractFacebookProfile(profile) {
+	console.log(profile);
 	let email = null;
 
 	if (profile.emails) {
@@ -46,7 +63,7 @@ passport.use(new GoogleStrategy({
 	callbackURL: '/api/google/callback',
 	accessType: 'offline'
 }, (accessToken, refreshToken, profile, done) => {
-	const userData = extractProfile(profile);
+	const userData = extractGoogleProfile(profile);
 
 	User.findOne({
 		email: userData.email
@@ -61,8 +78,34 @@ passport.use(new GoogleStrategy({
 		} else {
 			done(null, user);
 		}
-	})
+	});
 }));
+
+passport.use(new FacebookStrategy({
+		clientID: config.get('facebookClientAppId'),
+		clientSecret: config.get('facebookClientApiSecret'),
+		callbackURL: '/api/facebook/callback'
+	},
+
+	(token, refreshToken, profile, done) => {
+		const userData = extractFacebookProfile(profile);
+
+		User.findOne({
+			email: userData.email
+		}).then(user => {
+			if (user === null) {
+				user = new User();
+				user.name = userData.name;
+				user.googleId = userData.googleId;
+				user.email = userData.email;
+
+				user.save().then(() => done(null, user)).catch(console.log);
+			} else {
+				done(null, user);
+			}
+		});
+	})
+);
 
 passport.use('user', new LocalStrategy({
 	usernameField: 'email'
