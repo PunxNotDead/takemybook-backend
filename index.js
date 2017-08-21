@@ -20,7 +20,6 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(expressDomainMiddleware);
-//app.use(busboy());
 app.use(express.static('static'));
 
 app.use(cookieParser());

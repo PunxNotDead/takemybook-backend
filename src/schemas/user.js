@@ -14,14 +14,21 @@ const UserSchema = new Schema({
 	},
 	email: {
 		type: String,
-		required: true,
 		unique: true,
-		trim: true
+		trim: true,
+		sparse: true
 	},
 	googleId: {
 		type: String,
 		unique: true,
-		trim: true
+		trim: true,
+		sparse: true
+	},
+	facebookId: {
+		type: String,
+		unique: true,
+		trim: true,
+		sparse: true
 	},
 	passwordHash: String,
 	registrationDate: Date,

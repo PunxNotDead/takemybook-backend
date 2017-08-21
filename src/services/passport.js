@@ -35,18 +35,10 @@ function extractGoogleProfile(profile) {
 }
 
 function extractFacebookProfile(profile) {
-	console.log(profile);
-	let email = null;
-
-	if (profile.emails) {
-		let filteredEmail = _.find(profile.emails, email => email.type === 'account');
-		email = filteredEmail ? filteredEmail.value : null;
-	}
-
 	return {
 		id: profile.id,
 		name: profile.displayName,
-		email: email
+		email: profile.email
 	};
 }
 
@@ -71,8 +63,9 @@ passport.use(new GoogleStrategy({
 		if (user === null) {
 			user = new User();
 			user.name = userData.name;
-			user.googleId = userData.googleId;
+			user.googleId = userData.id;
 			user.email = userData.email;
+			user.active = true;
 
 			user.save().then(() => done(null, user)).catch(console.log);
 		} else {
@@ -91,13 +84,14 @@ passport.use(new FacebookStrategy({
 		const userData = extractFacebookProfile(profile);
 
 		User.findOne({
-			email: userData.email
+			facebookId: userData.id
 		}).then(user => {
 			if (user === null) {
 				user = new User();
 				user.name = userData.name;
-				user.googleId = userData.googleId;
+				user.facebookId = userData.id;
 				user.email = userData.email;
+				user.active = true;
 
 				user.save().then(() => done(null, user)).catch(console.log);
 			} else {
